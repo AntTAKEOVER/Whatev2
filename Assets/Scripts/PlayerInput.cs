@@ -95,7 +95,7 @@ public class PlayerInput : LivingEntity {
 
 		if(moveVelocity.x != 0 || moveVelocity.z != 0){
 			walking.mute = false;
-			walking.volume = 0.4f;
+			walking.volume = 0.6f;
 			if(canAddEnergy){
 				StartCoroutine(addEnergy());
 				canAddEnergy = false;
