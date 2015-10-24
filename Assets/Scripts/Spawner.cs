@@ -5,12 +5,14 @@ public class Spawner : MonoBehaviour {
 	
 	public Wave[] waves;
 	public Enemy enemy;
+	public GameObject health;
 	
 	LivingEntity playerEntity;
 	Transform playerT;
 	
 	Wave currentWave;
 	int currentWaveNumber;
+	int enemiesSpawned;
 	
 	int enemiesRemainingToSpawn;
 	int enemiesRemainingAlive;
@@ -42,6 +44,11 @@ public class Spawner : MonoBehaviour {
 	}
 	
 	void Update() {
+		if(enemiesSpawned >= 5){
+			enemiesSpawned = 0;
+			spawnHealth();
+		}
+
 		if (!isDisabled) {
 			if (Time.time > nextCampCheckTime) {
 				nextCampCheckTime = Time.time + timeBetweenCampingChecks;
@@ -81,7 +88,13 @@ public class Spawner : MonoBehaviour {
 		}
 		
 		Enemy spawnedEnemy = Instantiate(enemy, spawnTile.position + Vector3.up, Quaternion.identity) as Enemy;
+		enemiesSpawned++;
 		spawnedEnemy.OnDeath += OnEnemyDeath;
+	}
+
+	void spawnHealth(){
+		Transform SpawnTile = map.GetRandomOpenCoord();
+		Instantiate(health, SpawnTile.position + Vector3.up * 2f, Quaternion.identity);
 	}
 	
 	void OnPlayerDeath() {

@@ -14,6 +14,7 @@ public class PlayerInput : LivingEntity {
 	bool canChangeColor = true;
 	bool isShooting = false;
 	public Vector3 moveVelocity;
+	public int modifyHealth = 0;
 
 
 	Camera viewCamera;
@@ -46,8 +47,15 @@ public class PlayerInput : LivingEntity {
 	
 	// Update is called onceper frame
 	void Update () {
+
+
 		health = Mathf.Clamp (health, 0, 200);
 		energyBar.text = "Energy Level: " + health;
+
+		if(modifyHealth > 0){
+			health += modifyHealth;
+			modifyHealth = 0;
+		}
 
 		if(health <= 0){
 			Die ();
@@ -74,7 +82,7 @@ public class PlayerInput : LivingEntity {
 		}
 
 		//WeaponInput
-		if(Input.GetMouseButton(0)){
+		if(Input.GetMouseButtonDown(0)){
 
 			gunController.Shoot();
 			if(isShooting == false){
@@ -142,6 +150,8 @@ public class PlayerInput : LivingEntity {
 			isShooting = false;
 		}
 	}
+
+
 
 	//Adding Energy
 	IEnumerator addEnergy(){
