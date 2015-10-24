@@ -49,7 +49,7 @@ public class Spawner : MonoBehaviour {
 		if(currentWaveNumber >= waves.Length && enemiesRemainingAlive == 0){
 		//	Debug.Log("WIN!");
 			winText.text = "You win!";
-			FindObjectOfType<PlayerInput>().enabled = false;
+			//FindObjectOfType<PlayerInput>().enabled = false;
 			
 		}
 		if(enemiesSpawned >= 5){
