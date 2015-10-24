@@ -13,8 +13,9 @@ public class CharacterAnimation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		moveVelocity = FindObjectOfType<PlayerInput>().moveVelocity;
+
 		if(FindObjectOfType<PlayerInput>() != null){
+			moveVelocity = FindObjectOfType<PlayerInput>().moveVelocity;
 			character.SetFloat("Velocity", moveVelocity.magnitude);
 		}
 	}

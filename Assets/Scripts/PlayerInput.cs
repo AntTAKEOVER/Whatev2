@@ -9,6 +9,7 @@ public class PlayerInput : LivingEntity {
 	public float moveSpeed = 5f;
 	public Text energyBar;
 
+	bool canFade;
 	bool canAddEnergy = true;
 	bool CanSubtractEnergy = true;
 	bool canChangeColor = true;
@@ -21,21 +22,21 @@ public class PlayerInput : LivingEntity {
 	PlayerController controller;
 	GunController gunController;
 
-	AudioSource BGMusic;
+
 	AudioSource walking;
-	AudioSource energyLow;
+
 	AudioSource shooting;
 	AudioSource[] audios;
 
 	// Use this for initialization
 	protected override void Start () {
 		audios = GetComponents<AudioSource>();
-		BGMusic = audios[0];
+
 		walking = audios[1];
-		energyLow = audios[2];
+
 		shooting = audios[3];
-		BGMusic.Play();
-		BGMusic.volume = 0.8f;
+	//	BGMusic.Play();
+	//	BGMusic.volume = 0.8f;
 
 		base.Start ();
 		controller = GetComponent<PlayerController>();
@@ -87,7 +88,7 @@ public class PlayerInput : LivingEntity {
 			gunController.Shoot();
 			if(isShooting == false){
 				shooting.Play();
-				BGMusic.volume = 0.5f;
+			
 				shooting.volume = 0.6f;
 				StartCoroutine(canShoot());
 			}
@@ -98,7 +99,7 @@ public class PlayerInput : LivingEntity {
 			
 		}
 		else{
-			BGMusic.volume = 0.8f;
+
 		}
 
 		if(moveVelocity.x != 0 || moveVelocity.z != 0){
@@ -114,17 +115,27 @@ public class PlayerInput : LivingEntity {
 		}
 
 		if(health <= 50 || health >= 150){
-			energyLow.mute = false;
-			energyLow.volume = 0.1f;
+
 			if(canChangeColor){
 			StartCoroutine(cameraFlash());
 				canChangeColor = false;
 			}
 		}
 		if(health > 50 || health < 150){
-			energyLow.mute = true;
+
 			Camera.main.backgroundColor = Color.black;
 		}
+
+		if(health < 50){
+			if(canFade){
+			FindObjectOfType<AudioController>().lowheath = true;
+				canFade = false;
+			}
+		}
+		if(health > 50){
+			canFade = true;
+		}
+
 
 	}
 
