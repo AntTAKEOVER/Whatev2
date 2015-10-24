@@ -1,11 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Enemy.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CharacterAnimation.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerInput.cs" Line="53" Column="11" />
-      <File FileName="Assets/Scripts/Spawner.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LivingEntity.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Enemy.cs" Line="23" Column="19" />
+      <File FileName="Assets\Scripts\AudioController.cs" Line="19" Column="7" />
+      <File FileName="Assets\Scripts\CharacterAnimation.cs" Line="14" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
