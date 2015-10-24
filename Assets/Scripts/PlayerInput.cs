@@ -14,6 +14,7 @@ public class PlayerInput : LivingEntity {
 	bool CanSubtractEnergy = true;
 	bool canChangeColor = true;
 	bool isShooting = false;
+
 	public Vector3 moveVelocity;
 	public int modifyHealth = 0;
 
@@ -49,6 +50,9 @@ public class PlayerInput : LivingEntity {
 	// Update is called onceper frame
 	void Update () {
 
+		if(transform.position.y < -5){
+			Die();
+		}
 
 		health = Mathf.Clamp (health, 0, 200);
 		energyBar.text = "Energy Level: " + health;
@@ -92,11 +96,7 @@ public class PlayerInput : LivingEntity {
 				shooting.volume = 0.6f;
 				StartCoroutine(canShoot());
 			}
-
-
-				health -= 5;
-			
-			
+			health -= 5;
 		}
 		else{
 

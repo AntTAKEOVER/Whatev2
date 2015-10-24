@@ -8,7 +8,7 @@ public class AudioController : MonoBehaviour {
 	public AudioMixerSnapshot Intense;
 	public AudioMixerSnapshot Calm;
 	public bool lowheath;
-	private bool fadeNow = false;
+
 
 	AudioSource pianoAS;
 	AudioSource guitarAS;
@@ -33,20 +33,15 @@ public class AudioController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//if(lowheath){
-		//	canFade();
-		//}
 
 		if(lowheath){
 			StartCoroutine(FadeMainToLow());
 			lowheath = false;
-			//energyLowMusic();
+
 		}
 	}
 
-	//void canFade(){
-	//	fadeNow = true;
-	//}
+
 
 	void mainBGMusic(){
 	
@@ -66,7 +61,7 @@ public class AudioController : MonoBehaviour {
 		guitarBS.mute = false;
 		pianoAS.mute = false;
 		warning.mute = false;
-		warning.volume = 0.1f;
+		warning.volume = 0.05f;
 		guitarBS.volume = 0.1f;
 		pianoAS.volume = 0.1f;
 		Sad.volume = 2.5f;

@@ -1,12 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AudioController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Spawner.cs">
     <Files>
       <File FileName="Assets/Scripts/HealthPickup.cs" Line="9" Column="53" />
       <File FileName="Assets/Scripts/Projectile.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PlayerInput.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CharacterAnimation.cs" Line="16" Column="3" />
-      <File FileName="Assets/Scripts/AudioController.cs" Line="41" Column="36" />
+      <File FileName="Assets/Scripts/PlayerInput.cs" Line="55" Column="19" />
+      <File FileName="Assets/Scripts/CharacterAnimation.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/AudioController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Spawner.cs" Line="52" Column="50" />
+      <File FileName="Assets/Scripts/GameUI.cs" Line="36" Column="55" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

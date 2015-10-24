@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour {
-	
+	public Text winText;
+		
 	public Wave[] waves;
 	public Enemy enemy;
 	public GameObject health;
@@ -44,6 +46,12 @@ public class Spawner : MonoBehaviour {
 	}
 	
 	void Update() {
+		if(currentWaveNumber >= waves.Length && enemiesRemainingAlive == 0){
+		//	Debug.Log("WIN!");
+			winText.text = "You win!";
+			FindObjectOfType<PlayerInput>().enabled = false;
+			
+		}
 		if(enemiesSpawned >= 5){
 			enemiesSpawned = 0;
 			spawnHealth();
