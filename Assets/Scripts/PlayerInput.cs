@@ -57,7 +57,7 @@ public class PlayerInput : LivingEntity {
 			modifyHealth = 0;
 		}
 
-		if(health <= 0){
+		if(health <= 0 || health == 200){
 			Die ();
 		}
 		if (CanSubtractEnergy) {
@@ -113,7 +113,7 @@ public class PlayerInput : LivingEntity {
 			walking.mute = true;
 		}
 
-		if(health <= 50){
+		if(health <= 50 || health >= 150){
 			energyLow.mute = false;
 			energyLow.volume = 0.1f;
 			if(canChangeColor){
@@ -121,10 +121,11 @@ public class PlayerInput : LivingEntity {
 				canChangeColor = false;
 			}
 		}
-		if(health > 50){
+		if(health > 50 || health < 150){
 			energyLow.mute = true;
 			Camera.main.backgroundColor = Color.black;
 		}
+
 	}
 
 	//Flashing BG

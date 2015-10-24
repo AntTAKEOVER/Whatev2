@@ -11,6 +11,7 @@ public class CharacterAnimation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//character.SetFloat (Velocity, PlayerInput.moveVelocity.magnitude);
+		Vector3 moveVelocity = FindObjectOfType<PlayerInput>().moveVelocity;
+		character.SetFloat("Speed", moveVelocity.magnitude);
 	}
 }
