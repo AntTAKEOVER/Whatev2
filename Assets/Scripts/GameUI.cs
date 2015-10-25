@@ -33,7 +33,6 @@ public class GameUI : MonoBehaviour {
 	//UI Input
 	public void startNewGame(){
 		Application.LoadLevel (Application.loadedLevel);
-		//FindObjectOfType<Spawner>().winText.enabled = false;
 	}
 
 }

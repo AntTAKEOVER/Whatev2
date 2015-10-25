@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour {
 	public Text winText;
-		
+	
 	public Wave[] waves;
 	public Enemy enemy;
 	public GameObject health;
@@ -33,6 +33,7 @@ public class Spawner : MonoBehaviour {
 	public event System.Action<int> OnNewWave;
 	
 	void Start() {
+		winText.text = "";
 
 		playerEntity = FindObjectOfType<PlayerInput> ();
 		playerT = playerEntity.transform;
@@ -46,11 +47,10 @@ public class Spawner : MonoBehaviour {
 	}
 	
 	void Update() {
-		if(currentWaveNumber >= waves.Length && enemiesRemainingAlive == 0){
-		//	Debug.Log("WIN!");
-			winText.text = "You win!";
-			//FindObjectOfType<PlayerInput>().enabled = false;
-			
+
+		if(enemiesRemainingAlive == 0 && currentWaveNumber >= waves.Length){
+			FindObjectOfType<PlayerInput>().isInUse = false;
+			StartCoroutine(hasWon());
 		}
 		if(enemiesSpawned >= 5){
 			enemiesSpawned = 0;
@@ -71,6 +71,17 @@ public class Spawner : MonoBehaviour {
 				
 				StartCoroutine (SpawnEnemy ());
 			}
+		}
+	}
+
+	IEnumerator hasWon(){
+		yield return new WaitForSeconds(1);
+		{
+			winText.text = "You win!";
+		}
+		yield return new WaitForSeconds(1);
+		{
+			Application.LoadLevel(1);
 		}
 	}
 	

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(GunController))]
 public class PlayerInput : LivingEntity {
 
+	public bool isInUse = true;
 	public float moveSpeed = 5f;
 	public Text energyBar;
 
@@ -31,6 +32,7 @@ public class PlayerInput : LivingEntity {
 
 	// Use this for initialization
 	protected override void Start () {
+		if(isInUse){
 		audios = GetComponents<AudioSource>();
 
 		walking = audios[1];
@@ -43,12 +45,19 @@ public class PlayerInput : LivingEntity {
 		controller = GetComponent<PlayerController>();
 		viewCamera = Camera.main;
 		gunController = GetComponent<GunController>();
-
+		}
+		else{
+			base.Start ();
+			controller = GetComponent<PlayerController>();
+			viewCamera = Camera.main;
+			gunController = GetComponent<GunController>();
+		}
 
 	}
 	
 	// Update is called onceper frame
 	void Update () {
+		if(isInUse){
 
 		if(transform.position.y < -5){
 			Die();
@@ -136,8 +145,30 @@ public class PlayerInput : LivingEntity {
 			canFade = true;
 		}
 
-
 	}
+		else{
+			//MoveInput
+			Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+			moveVelocity = moveInput.normalized * moveSpeed;
+			controller.move(moveVelocity);
+			
+			//LookInput
+			Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
+			Plane groundPlane = new Plane(Vector3.up,Vector3.zero);
+			float rayDistance;
+			
+			if(groundPlane.Raycast(ray, out rayDistance)){
+				Vector3 point = ray.GetPoint(rayDistance);
+				//Debug.DrawLine(ray.origin, point, Color.red);
+				controller.LookAt(point);
+				//WeaponInput
+				if(Input.GetMouseButtonDown(0)){
+					
+					gunController.Shoot();
+				}
+			}
+		}
+}
 
 	//Flashing BG
 	IEnumerator cameraFlash(){
