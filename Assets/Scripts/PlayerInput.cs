@@ -149,7 +149,7 @@ public class PlayerInput : LivingEntity {
 		else{
 			if(transform.position.y < -5){
 				Debug.Log("Fell down NOOB!");
-				Die();
+				transform.position = Vector3.zero;
 			}
 			//MoveInput
 			Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
