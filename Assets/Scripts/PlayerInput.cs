@@ -9,6 +9,7 @@ public class PlayerInput : LivingEntity {
 	public bool isInUse = true;
 	public float moveSpeed = 5f;
 	public Text energyBar;
+	public Text warningText;
 
 	bool canFade;
 	bool canAddEnergy = true;
@@ -32,6 +33,7 @@ public class PlayerInput : LivingEntity {
 
 	// Use this for initialization
 	protected override void Start () {
+		warningText.text = "";
 		if(isInUse){
 		audios = GetComponents<AudioSource>();
 
@@ -47,6 +49,11 @@ public class PlayerInput : LivingEntity {
 		gunController = GetComponent<GunController>();
 		}
 		else{
+			audios = GetComponents<AudioSource>();
+			
+			walking = audios[1];
+			
+			shooting = audios[3];
 			base.Start ();
 			controller = GetComponent<PlayerController>();
 			viewCamera = Camera.main;
@@ -57,6 +64,13 @@ public class PlayerInput : LivingEntity {
 	
 	// Update is called onceper frame
 	void Update () {
+		if(moveVelocity.x != 0 || moveVelocity.z != 0){
+			walking.mute = false;
+			walking.volume = 0.6f;
+		}
+		else{
+			walking.mute = true;
+		}
 		if(isInUse){
 
 		if(transform.position.y < -5){
@@ -73,6 +87,7 @@ public class PlayerInput : LivingEntity {
 
 		if(health <= 0 || health == 200){
 			Die ();
+			warningText.text = "";
 		}
 		if (CanSubtractEnergy) {
 			StartCoroutine (subtractEnergy ());
@@ -135,7 +150,7 @@ public class PlayerInput : LivingEntity {
 			Camera.main.backgroundColor = Color.black;
 		}
 
-		if(health < 50){
+		if(health < 50 || health > 150){
 			if(canFade){
 			FindObjectOfType<AudioController>().lowheath = true;
 				canFade = false;
@@ -144,6 +159,9 @@ public class PlayerInput : LivingEntity {
 		if(health > 50){
 			canFade = true;
 		}
+			if(health < 150 && health > 50){
+				canFade = true;
+			}
 
 	}
 		else{
@@ -169,6 +187,12 @@ public class PlayerInput : LivingEntity {
 				if(Input.GetMouseButtonDown(0)){
 					
 					gunController.Shoot();
+					if(isShooting == false){
+						shooting.Play();
+						
+						shooting.volume = 0.6f;
+						StartCoroutine(canShoot());
+					}
 				}
 			}
 		}
@@ -176,12 +200,13 @@ public class PlayerInput : LivingEntity {
 
 	//Flashing BG
 	IEnumerator cameraFlash(){
+		yield return new WaitForSeconds(1f);
 		{
-			Camera.main.backgroundColor = Color.black;
+			warningText.text = "Warning";
 		}
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(1f);
 		{
-			Camera.main.backgroundColor = Color.red;
+			warningText.text = "";
 			canChangeColor = true;
 		}
 

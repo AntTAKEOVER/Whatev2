@@ -134,8 +134,17 @@ public class Spawner : MonoBehaviour {
 	void resetPlayerPosition(){
 		playerT.position = map.GetTileFromPosition(Vector3.zero).position + Vector3.up * 3;
 	}
+
+	IEnumerator waveNumber(){
+		winText.text = "Wave " +currentWaveNumber+1 + "!";
+		yield return new WaitForSeconds(1.5f);
+		winText.text = "";
+	}
 	
 	void NextWave() {
+		StartCoroutine(waveNumber());
+
+
 		currentWaveNumber ++;
 
 		if (currentWaveNumber - 1 < waves.Length) {

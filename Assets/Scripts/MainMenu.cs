@@ -3,11 +3,13 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
-	public Text creditText;
+//	public Text creditText;
+	public GameObject instructions;
 
 
 	// Use this for initialization
 	void Start () {
+//		creditText.text = " ";
 	}
 	
 	// Update is called once per frame
@@ -24,8 +26,18 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void onCredit(){
+		//Stuff for credits here!
+	
+	}
 
-		Debug.Log("Credits!");
+	public void onInstruction(){
+		//instructions.enabled = true;
+		instructions.SetActive(true);
+		//stuff for instructions here!
+	}
+
+	public void exitInstrucitons(){
+		instructions.SetActive(false);
 	}
 
 
